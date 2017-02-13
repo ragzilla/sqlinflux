@@ -1,0 +1,11 @@
+# freetds compatible dsn
+dsn: Server=SQLSERVER\INSTANCE;Database=SolarWindsOrion;User Id=sa;Password=dontusesa
+# you'll likely need to change the AlertDefId specified in the IN clause, this is specific to our install
+query: SELECT [AlertDefID],COUNT(AlertDefID) AS CNT FROM [SolarWindsOrion].[dbo].[AlertStatusView] WHERE AlertDefID IN ('B7654BF8-44FE-4D3E-AECF-E6864D283671','1077E4CA-3ACA-48D1-9EB4-BE741534F2AF') GROUP BY AlertDefID
+# this rewrites the AlertDefID to something we can store and query on in influx
+translations:
+  B7654BF8-44FE-4D3E-AECF-E6864D283671: interface
+  1077E4CA-3ACA-48D1-9EB4-BE741534F2AF: node
+# influx tags in case we have multiple configs dropping into one database
+tags:
+  application: orionnpm
