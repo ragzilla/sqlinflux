@@ -58,6 +58,9 @@ func main() {
 		}
 		fields[Variable] = Value
 	}
+	if len(fields) == 0 {
+		return
+	}
 	Pt, err := client.NewPoint("sqlValues", c.Tags, fields, time.Now().UTC().Round(time.Minute))
 	if err != nil {
 		panic(err)
